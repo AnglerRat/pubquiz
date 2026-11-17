@@ -1,0 +1,23 @@
+{
+  "name": "pubquiz",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "db:migrate": "node --env-file=.env scripts/db.mjs migrate",
+    "db:seed": "node --env-file=.env scripts/db.mjs seed"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^4.12.0",
+    "mysql2": "^3.24.6",
+    "nuxt": "^4.6.4",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.154"
+  }
+}

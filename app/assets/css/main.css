@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  /* Systeemlettertype voor de beheerschermen */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Spelshow-lettertype voor de spelersschermen: stevig, speels, goed leesbaar */
+  --font-show: "Rubik", system-ui, sans-serif;
+
+  /* Spelshow-palet (spelersschermen) */
+  --color-show-blue: #1739b8;   /* achtergrond */
+  --color-show-ink: #0d1a4a;    /* tekst, randen, schaduwen */
+  --color-show-yellow: #ffcf2e; /* knoppen, logo, voortgang */
+  --color-show-coral: #ff5a4e;  /* accent / fouten */
+  --color-show-sky: #d9e4ff;    /* zachte vlakken op wit */
+}
+
+/*
+ * Spelersschermen: spelshow-uitstraling, maar rustig en goed leesbaar voor alle leeftijden.
+ * Basisgrootte 18px, hoog contrast, grote aanraakvlakken, dikke randen met harde schaduw.
+ */
+@layer components {
+  /* Blauwe achtergrond met spotlight en subtiele zonnestralen */
+  .show-stage {
+    background-color: var(--color-show-blue);
+    background-image:
+      radial-gradient(ellipse 80% 45% at 50% 0%, rgb(255 255 255 / 0.22), transparent 70%),
+      repeating-conic-gradient(from 0deg at 50% -5%, rgb(255 255 255 / 0.045) 0deg 7deg, transparent 7deg 14deg);
+    background-attachment: fixed;
+  }
+
+  .show-logo {
+    @apply inline-block -rotate-2 rounded-xl border-[3px] border-show-ink bg-show-yellow px-5 py-1.5
+      font-show text-3xl font-black tracking-tight text-show-ink uppercase shadow-[5px_5px_0_var(--color-show-ink)];
+  }
+
+  .player-card {
+    @apply rounded-2xl border-[3px] border-show-ink bg-white p-6 text-show-ink shadow-[6px_6px_0_var(--color-show-ink)];
+    animation: card-in 0.35s ease-out both;
+  }
+
+  .player-chip {
+    @apply inline-block rounded-full bg-show-sky px-3 py-1 text-sm font-bold tracking-wide text-show-ink uppercase;
+  }
+
+  .player-title {
+    @apply text-3xl leading-tight font-extrabold text-show-ink;
+  }
+
+  .player-label {
+    @apply block text-xl font-bold text-show-ink;
+  }
+
+  .player-hint {
+    @apply mt-1 text-base text-slate-600;
+  }
+
+  .player-input {
+    @apply block w-full rounded-xl border-[3px] border-show-ink bg-white px-4 py-3 text-2xl font-medium text-show-ink
+      placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-show-yellow;
+  }
+
+  .player-button {
+    @apply block w-full rounded-xl border-[3px] border-show-ink bg-show-yellow px-4 py-4 text-center text-xl font-extrabold
+      text-show-ink uppercase shadow-[4px_4px_0_var(--color-show-ink)] transition-[transform,box-shadow] duration-100
+      active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_var(--color-show-ink)]
+      disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white;
+  }
+
+  .player-error {
+    @apply mt-3 rounded-lg border-2 border-show-coral bg-show-coral/10 px-3 py-2 font-semibold text-red-800;
+  }
+
+  .player-notice {
+    @apply rounded-xl border-2 border-show-ink bg-show-yellow/30 p-4 font-medium text-show-ink;
+  }
+
+  /* Link op de blauwe achtergrond */
+  .player-link {
+    @apply text-lg font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white;
+  }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-card { animation: none; }
+}
